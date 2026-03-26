@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: tadweeralata/tdweer
+  name: git-gateway
   branch: main
 
 media_folder: "images"
@@ -29,3 +28,8 @@ collections:
               - { label: "سنوات العطاء", name: "years", widget: "string" }
               - { label: "أطنان مُدوَّرة", name: "tons", widget: "string" }
               - { label: "شراكات مجتمعية", name: "partnerships", widget: "string" }
+```
+
+بعدها جرب:
+```
+https://marvelous-biscuit-f78b3d.netlify.app
