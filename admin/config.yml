@@ -1,6 +1,6 @@
 backend:
-  name: github
-  repo: tadweeralata-sketch/tdweer
+  backend:
+  name: git-gateway
   branch: main
 
 media_folder: "images"
