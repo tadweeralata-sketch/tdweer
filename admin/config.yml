@@ -1,30 +1,22 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: tadweeralata-sketch/tdweer
   branch: main
 
-media_folder: "images"
-
-locale: 'ar'
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "settings"
     label: "إعدادات الموقع"
     files:
-      - name: "general"
-        label: "المحتوى الرئيسي"
-        file: "_data/content.json"
+      - file: "data/settings.json"
+        label: "بيانات الموقع"
+        name: "settings"
         fields:
-          - { label: "عنوان الصفحة الرئيسية", name: "hero_title", widget: "string" }
-          - { label: "الوصف التعريفي", name: "hero_tagline", widget: "text" }
-          - { label: "نص من نحن", name: "about_text", widget: "text" }
-          - { label: "نص الرؤية", name: "vision_text", widget: "text" }
-          - { label: "رقم الهاتف", name: "phone", widget: "string" }
-          - { label: "البريد الإلكتروني", name: "email", widget: "string" }
-          - label: "الإحصائيات"
-            name: "stats"
-            widget: "object"
-            fields:
-              - { label: "عدد المتطوعين", name: "volunteers", widget: "string" }
-              - { label: "سنوات العطاء", name: "years", widget: "string" }
-              - { label: "أطنان مُدوَّرة", name: "tons", widget: "string" }
-              - { label: "شراكات مجتمعية", name: "partnerships", widget: "string" }
+          - { label: "عدد الشراكات", name: "partners", widget: "string" }
+          - { label: "عدد الأطنان", name: "tons", widget: "string" }
+          - { label: "عدد السنوات", name: "years", widget: "string" }
+          - { label: "عدد المتطوعين", name: "volunteers", widget: "string" }
+          - { label: "رقم الجوال", name: "phone", widget: "string" }
+          - { label: "الإيميل", name: "email", widget: "string" }
