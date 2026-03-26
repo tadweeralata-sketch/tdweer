@@ -2,20 +2,5 @@ backend:
   name: github
   repo: tadweeralata-sketch/tdweer
   branch: main
-
-media_folder: "images"
-locale: 'ar'
-
-collections:
-  - name: "settings"
-    label: "إعدادات الموقع"
-    files:
-      - name: "general"
-        label: "المحتوى الرئيسي"
-        file: "_data/content.json"
-        fields:
-          - { label: "العنوان الرئيسي", name: "hero_title", widget: "string" }
-          - { label: "الوصف", name: "hero_tagline", widget: "text" }
-          - { label: "نص من نحن", name: "about_text", widget: "text" }
-          - { label: "رقم الهاتف", name: "phone", widget: "string" }
-          - { label: "البريد الإلكتروني", name: "email", widget: "string" }
+  base_url: https://cms-auth.tadweeralata.workers.dev
+  auth_endpoint: /auth
