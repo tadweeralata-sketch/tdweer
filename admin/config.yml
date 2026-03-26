@@ -11,7 +11,7 @@ collections:
   - name: "settings"
     label: "إعدادات الموقع"
     files:
-      - file: "data/site.json"
+      - file: "admin/data/settings.json"
         label: "بيانات الموقع"
         name: "site"
         fields:
