@@ -4,7 +4,7 @@ backend:
 
 media_folder: "images"
 
-locale: 'ar'
+locale: ar
 
 collections:
   - name: "settings"
@@ -28,8 +28,3 @@ collections:
               - { label: "سنوات العطاء", name: "years", widget: "string" }
               - { label: "أطنان مُدوَّرة", name: "tons", widget: "string" }
               - { label: "شراكات مجتمعية", name: "partnerships", widget: "string" }
-```
-
-بعدها جرب:
-```
-https://marvelous-biscuit-f78b3d.netlify.app
