@@ -2,324 +2,110 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة التحكم - تدوير العطاء</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<title>لوحة التحكم الاحترافية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Cairo', sans-serif; background: #f0f4f0; color: #1a3a2a; min-height: 100vh; }
-
-  /* LOGIN */
-  .login-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
-  }
-  .login-box {
-    background: white;
-    border-radius: 24px;
-    padding: 3rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    text-align: center;
-  }
-  .login-icon { font-size: 3rem; margin-bottom: 1rem; }
-  .login-box h2 { font-size: 1.5rem; font-weight: 900; color: #1a3a2a; margin-bottom: 0.5rem; }
-  .login-box p { color: #6a8070; font-size: 0.9rem; margin-bottom: 2rem; }
-  .login-box input {
-    width: 100%;
-    padding: 0.9rem 1.2rem;
-    border: 2px solid #e0ebe4;
-    border-radius: 12px;
-    font-family: 'Cairo', sans-serif;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    outline: none;
-    transition: border 0.3s;
-    text-align: center;
-    letter-spacing: 0.2em;
-  }
-  .login-box input:focus { border-color: #40916c; }
-  .login-btn {
-    width: 100%;
-    padding: 0.9rem;
-    background: linear-gradient(135deg, #2d6a4f, #40916c);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-family: 'Cairo', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .login-btn:hover { transform: translateY(-2px); }
-  .login-error { color: #e63946; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
-
-  /* ADMIN */
-  .admin-screen { display: none; }
-  .admin-header {
-    background: #1a3a2a;
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .admin-header h1 { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-  .save-btn {
-    background: #40916c;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 100px;
-    font-family: 'Cairo', sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-  }
-  .save-btn:hover { background: #52b788; }
-  .logout-btn {
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    font-family: 'Cairo', sans-serif;
-    cursor: pointer;
-    font-size: 0.85rem;
-    margin-right: 0.5rem;
-  }
-
-  .admin-body { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
-
-  .section-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
-  }
-  .section-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #1a3a2a;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 2px solid #f0f4f0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .field-group { margin-bottom: 1.2rem; }
-  .field-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #4a6055; margin-bottom: 0.4rem; }
-  .field-group input, .field-group textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 2px solid #e8f0eb;
-    border-radius: 10px;
-    font-family: 'Cairo', sans-serif;
-    font-size: 0.95rem;
-    color: #1a3a2a;
-    outline: none;
-    transition: border 0.2s;
-    resize: vertical;
-  }
-  .field-group input:focus, .field-group textarea:focus { border-color: #40916c; }
-  .field-group textarea { min-height: 80px; }
-
-  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #1a3a2a;
-    color: white;
-    padding: 0.8rem 2rem;
-    border-radius: 100px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: transform 0.4s;
-    z-index: 100;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  .github-info {
-    background: #e8f4ec;
-    border: 1px solid #b7e4c7;
-    border-radius: 12px;
-    padding: 1rem 1.2rem;
-    font-size: 0.85rem;
-    color: #2d6a4f;
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-  }
+    body { font-family: 'Cairo', sans-serif; background: #f4f7f6; padding: 20px; }
+    .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    h2 { color: #1a3a2a; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; color: #444; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo'; }
+    button { background: #2d6a4f; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; }
+    button:hover { background: #1a3a2a; }
+    .status { margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center; display: none; }
 </style>
 </head>
 <body>
 
-<!-- شاشة تسجيل الدخول -->
-<div class="login-screen" id="loginScreen">
-  <div class="login-box">
-    <div class="login-icon">♻️</div>
-    <h2>لوحة تحكم تدوير العطاء</h2>
-    <p>أدخل كلمة المرور للوصول</p>
-    <input type="password" id="passwordInput" placeholder="••••••••" onkeypress="if(event.key==='Enter') login()">
-    <button class="login-btn" onclick="login()">دخول</button>
-    <p class="login-error" id="loginError">كلمة المرور غير صحيحة</p>
-  </div>
+<div class="container">
+    <h2>⚙️ إعدادات الموقع والجمعية</h2>
+    
+    <div class="form-group"><label>اسم الجمعية</label><input type="text" id="site_name"></div>
+    <div class="form-group"><label>رابط اللوقو (صورة)</label><input type="text" id="logo_url"></div>
+    <div class="form-group"><label>العنوان الرئيسي</label><input type="text" id="hero_title"></div>
+    <div class="form-group"><label>الوصف</label><textarea id="hero_tagline"></textarea></div>
+    
+    <div class="form-group"><label>من نحن</label><textarea id="about_text"></textarea></div>
+    <div class="form-group"><label>الرؤية</label><textarea id="vision_text"></textarea></div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-group"><label>المتطوعين</label><input type="text" id="stat_volunteers"></div>
+        <div class="form-group"><label>السنوات</label><input type="text" id="stat_years"></div>
+        <div class="form-group"><label>الأطنان</label><input type="text" id="stat_tons"></div>
+        <div class="form-group"><label>الشراكات</label><input type="text" id="stat_partnerships"></div>
+    </div>
+
+    <div class="form-group"><label>رقم الهاتف</label><input type="text" id="phone"></div>
+    <div class="form-group"><label>البريد</label><input type="text" id="email"></div>
+    <div class="form-group"><label>الموقع (نص)</label><input type="text" id="address_text"></div>
+    <div class="form-group"><label>رابط تويتر</label><input type="text" id="twitter_url"></div>
+
+    <button onclick="updateGitHub()">🚀 حفظ التعديلات ونشرها للموقع</button>
+    <div id="status" class="status"></div>
 </div>
-
-<!-- لوحة التحكم -->
-<div class="admin-screen" id="adminScreen">
-  <div class="admin-header">
-    <h1>♻️ لوحة تحكم تدوير العطاء</h1>
-    <div>
-      <button class="logout-btn" onclick="logout()">خروج</button>
-      <button class="save-btn" onclick="saveChanges()">💾 حفظ التغييرات</button>
-    </div>
-  </div>
-
-  <div class="admin-body">
-
-    <div class="github-info">
-      ℹ️ بعد الحفظ، ستظهر التغييرات على الموقع خلال دقيقة واحدة تلقائياً عبر GitHub.
-    </div>
-
-    <!-- القسم الرئيسي -->
-    <div class="section-card">
-      <h3>🏠 القسم الرئيسي (Hero)</h3>
-      <div class="field-group">
-        <label>العنوان الرئيسي</label>
-        <input type="text" id="hero_title" value="جمعية تدوير العطاء">
-      </div>
-      <div class="field-group">
-        <label>الوصف التعريفي</label>
-        <textarea id="hero_tagline">نُحوّل النفايات إلى فرص، ونُعيد للمواد قيمتها من أجل غدٍ أكثر استدامة لمجتمعنا وأرضنا</textarea>
-      </div>
-    </div>
-
-    <!-- من نحن -->
-    <div class="section-card">
-      <h3>👥 من نحن</h3>
-      <div class="field-group">
-        <label>نص التعريف</label>
-        <textarea id="about_text">جمعية تدوير العطاء منظمة غير ربحية تأسست بهدف نشر ثقافة إعادة التدوير وتعزيز الوعي البيئي في المجتمع.</textarea>
-      </div>
-      <div class="field-group">
-        <label>نص الرؤية</label>
-        <textarea id="vision_text">أن نكون الجهة الرائدة في إعادة التدوير والاستدامة البيئية، ونسهم في بناء مجتمع واعٍ يُقدّر قيمة الموارد الطبيعية.</textarea>
-      </div>
-    </div>
-
-    <!-- الإحصائيات -->
-    <div class="section-card">
-      <h3>📊 الإحصائيات</h3>
-      <div class="stats-grid">
-        <div class="field-group">
-          <label>عدد المتطوعين</label>
-          <input type="text" id="stat_volunteers" value="+٥٠٠">
-        </div>
-        <div class="field-group">
-          <label>سنوات العطاء</label>
-          <input type="text" id="stat_years" value="٢٠+">
-        </div>
-        <div class="field-group">
-          <label>أطنان مُدوَّرة</label>
-          <input type="text" id="stat_tons" value="١٢٠">
-        </div>
-        <div class="field-group">
-          <label>شراكات مجتمعية</label>
-          <input type="text" id="stat_partnerships" value="٣٠+">
-        </div>
-      </div>
-    </div>
-
-    <!-- التواصل -->
-    <div class="section-card">
-      <h3>📞 معلومات التواصل</h3>
-      <div class="field-group">
-        <label>رقم الهاتف</label>
-        <input type="text" id="phone" value="٠٥٠٠٠٠٠٠٠٠+">
-      </div>
-      <div class="field-group">
-        <label>البريد الإلكتروني</label>
-        <input type="text" id="email" value="info@recycling.org.sa">
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="toast" id="toast">✅ تم الحفظ بنجاح!</div>
 
 <script>
-  // كلمة المرور — غيّرها لما تريد
-  const PASSWORD = 'tadweer2025';
+// --- إعداداتك هنا ---
+const CONFIG = {
+    token: 'YOUR_GITHUB_TOKEN', // ضع التوكن هنا
+    repo: 'USERNAME/REPO_NAME',   // ضع اسم المستخدم/المستودع هنا
+    file: 'data.json'
+};
 
-  // تحقق من الجلسة
-  if (sessionStorage.getItem('admin_logged_in') === 'true') {
-    showAdmin();
-    loadFromStorage();
-  }
+// جلب البيانات الحالية عند الفتح
+async function loadCurrent() {
+    const res = await fetch('data.json?t=' + Date.now());
+    const d = await res.json();
+    Object.keys(d).forEach(key => {
+        if(document.getElementById(key)) document.getElementById(key).value = d[key];
+    });
+}
+loadCurrent();
 
-  function login() {
-    const pass = document.getElementById('passwordInput').value;
-    if (pass === PASSWORD) {
-      sessionStorage.setItem('admin_logged_in', 'true');
-      showAdmin();
-      loadFromStorage();
-    } else {
-      document.getElementById('loginError').style.display = 'block';
-      document.getElementById('passwordInput').value = '';
+async function updateGitHub() {
+    const status = document.getElementById('status');
+    status.style.display = 'block';
+    status.style.background = '#eee';
+    status.innerText = 'جاري الاتصال بـ GitHub...';
+
+    // تجهيز البيانات الجديدة
+    const newData = {};
+    const ids = ['site_name','logo_url','hero_title','hero_tagline','about_text','vision_text','stat_volunteers','stat_years','stat_tons','stat_partnerships','phone','email','address_text','twitter_url'];
+    ids.forEach(id => newData[id] = document.getElementById(id).value);
+
+    try {
+        // 1. جلب SHA الملف
+        const getRes = await fetch(`https://api.github.com/repos/${CONFIG.repo}/contents/${CONFIG.file}`, {
+            headers: { 'Authorization': `token ${CONFIG.token}` }
+        });
+        const fileData = await getRes.json();
+
+        // 2. تحديث الملف
+        const putRes = await fetch(`https://api.github.com/repos/${CONFIG.repo}/contents/${CONFIG.file}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${CONFIG.token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: "تحديث من لوحة التحكم",
+                content: btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2)))),
+                sha: fileData.sha
+            })
+        });
+
+        if(putRes.ok) {
+            status.style.background = '#d4edda';
+            status.innerText = '✅ تم التحديث! انتظر دقيقة وحدث الموقع.';
+        } else {
+            throw new Error();
+        }
+    } catch (e) {
+        status.style.background = '#f8d7da';
+        status.innerText = '❌ خطأ: تأكد من التوكن واسم المستودع.';
     }
-  }
-
-  function logout() {
-    sessionStorage.removeItem('admin_logged_in');
-    document.getElementById('adminScreen').style.display = 'none';
-    document.getElementById('loginScreen').style.display = 'flex';
-  }
-
-  function showAdmin() {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminScreen').style.display = 'block';
-  }
-
-  function loadFromStorage() {
-    const fields = ['hero_title','hero_tagline','about_text','vision_text',
-                    'stat_volunteers','stat_years','stat_tons','stat_partnerships',
-                    'phone','email'];
-    fields.forEach(id => {
-      const saved = localStorage.getItem('cms_' + id);
-      if (saved) document.getElementById(id).value = saved;
-    });
-  }
-
-  function saveChanges() {
-    const fields = ['hero_title','hero_tagline','about_text','vision_text',
-                    'stat_volunteers','stat_years','stat_tons','stat_partnerships',
-                    'phone','email'];
-    
-    fields.forEach(id => {
-      localStorage.setItem('cms_' + id, document.getElementById(id).value);
-    });
-
-    // إظهار رسالة النجاح
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
+}
 </script>
 </body>
 </html>
