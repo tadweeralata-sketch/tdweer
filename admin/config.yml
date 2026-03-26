@@ -2,6 +2,7 @@ backend:
   name: github
   repo: tadweeralata-sketch/tdweer
   branch: main
+  auth_type: implicit
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
@@ -10,13 +11,13 @@ collections:
   - name: "settings"
     label: "إعدادات الموقع"
     files:
-      - file: "data/settings.json"
+      - file: "data/site.json"
         label: "بيانات الموقع"
-        name: "settings"
+        name: "site"
         fields:
+          - { label: "رقم التواصل", name: "phone", widget: "string" }
+          - { label: "البريد الإلكتروني", name: "email", widget: "string" }
           - { label: "عدد الشراكات", name: "partners", widget: "string" }
-          - { label: "عدد الأطنان", name: "tons", widget: "string" }
-          - { label: "عدد السنوات", name: "years", widget: "string" }
+          - { label: "كمية التدوير", name: "recycle_amount", widget: "string" }
+          - { label: "سنوات العطاء", name: "years", widget: "string" }
           - { label: "عدد المتطوعين", name: "volunteers", widget: "string" }
-          - { label: "رقم الجوال", name: "phone", widget: "string" }
-          - { label: "الإيميل", name: "email", widget: "string" }
